@@ -1,7 +1,7 @@
 // Motor control — handles direction + PWM speed for both motors
 // positive = forward, negative = reverse, 0 = stop (coast)
 
-void setMotor(int leftSpeed, int rightSpeed) {
+void setMotor(int leftSpeed, int rightSpeed) { //fixed: was 'motor(int a, int b)'
   // left motor
   if (leftSpeed > 0) {
     digitalWrite(LM_FWD, HIGH);

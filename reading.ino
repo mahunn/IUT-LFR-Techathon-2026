@@ -1,7 +1,7 @@
 // Reads all 5 IR sensors and builds a 5-bit pattern
 // bit 4 = leftmost sensor, bit 0 = rightmost
 
-void readSensors() {
+void readSensors() { //fixed: was 'reading()'
   sensorBits = 0;
   for (int i = 0; i < NUM_SENSORS; i++) {
     sensorValues[i] = analogRead(A0 + i);
@@ -13,6 +13,7 @@ void readSensors() {
 
 // prints raw sensor values + bit pattern + PID error to serial monitor
 // useful for calibration, kill this for competition runs (slows the loop)
+//fixed: added — original only had Serial.println(sensor, BIN)
 void debugPrint() {
   Serial.print("Sensors: ");
   for (int i = 0; i < NUM_SENSORS; i++) {

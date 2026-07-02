@@ -3,54 +3,54 @@
 
 // --- Pin assignments ---
 // Speed pins need PWM (5, 10 work on Uno/Nano)
-const int LM_SPD = 5;
-const int RM_SPD = 10;
+const int LM_SPD = 5;   //fixed: was 'lms', made const
+const int RM_SPD = 10;  //fixed: was 'rms', made const
 
 // Direction pins (any digital pin works)
-const int LM_FWD = 6;
-const int LM_BWD = 7;
-const int RM_FWD = 8;
-const int RM_BWD = 9;
+const int LM_FWD = 6;   //fixed: was 'lmf', made const
+const int LM_BWD = 7;   //fixed: was 'lmb', made const
+const int RM_FWD = 8;   //fixed: was 'rmf', made const
+const int RM_BWD = 9;   //fixed: was 'rmb', made const
 
 const int NUM_SENSORS = 5;
 
 // --- Tuning stuff (tweak these on the track) ---
-int threshold = 512;
-const int BASE_SPEED = 180;
-const int MAX_SPEED  = 255;
+int threshold = 512;        //fixed: was 'th'
+const int BASE_SPEED = 180; //fixed: was hardcoded 200 everywhere
+const int MAX_SPEED  = 255; //fixed: added
 
-// PID gains
+// PID gains //fixed: added PID (original had if-else chain)
 float Kp = 30.0;
 float Ki = 0.0;    // keep 0 unless it drifts to one side
 float Kd = 20.0;
 
 // --- State ---
-int sensorValues[NUM_SENSORS];
-int sensorBits = 0;
-float lastError = 0;
-float integral = 0;
-int lastKnownDirection = 0;  // -1 left, +1 right
+int sensorValues[NUM_SENSORS]; //fixed: was 's[5]'
+int sensorBits = 0;            //fixed: was 'sensor'
+float lastError = 0;           //fixed: added for PID
+float integral = 0;            //fixed: added for PID
+int lastKnownDirection = 0;    //fixed: was 'lastTurn'
 
 void setup() {
-  pinMode(LM_SPD, OUTPUT);
+  pinMode(LM_SPD, OUTPUT);   //fixed: was missing
   pinMode(LM_FWD, OUTPUT);
   pinMode(LM_BWD, OUTPUT);
-  pinMode(RM_SPD, OUTPUT);
+  pinMode(RM_SPD, OUTPUT);   //fixed: was missing
   pinMode(RM_FWD, OUTPUT);
   pinMode(RM_BWD, OUTPUT);
 
-  setMotor(0, 0);  // don't move on startup
+  setMotor(0, 0);  //fixed: added — don't move on startup
   Serial.begin(9600);
-  delay(1000);      // time to place on track
+  delay(1000);      //fixed: added — time to place on track
 }
 
 void loop() {
-  readSensors();
+  readSensors();  //fixed: was 'reading()'
 
   int activeSensors = 0;
   float weightedSum = 0;
 
-  // weighted average to get position error
+  //fixed: replaced entire if-else chain with weighted average + PID
   // sensor 0 (leftmost) = weight -2, sensor 4 (rightmost) = weight +2
   for (int i = 0; i < NUM_SENSORS; i++) {
     int bit = (sensorBits >> (4 - i)) & 1;
@@ -60,13 +60,13 @@ void loop() {
     }
   }
 
-  // all sensors on line = junction, just go straight
+  //fixed: added — original had no junction handling
   if (activeSensors == 5) {
     setMotor(BASE_SPEED, BASE_SPEED);
     return;
   }
 
-  // lost the line completely — spin in place to recover
+  //fixed: was gentle curve motor(80,200), now spins in place for faster recovery
   if (activeSensors == 0) {
     if (lastKnownDirection <= 0)
       setMotor(-120, 120);   // spin left
