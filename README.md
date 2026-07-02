@@ -9,30 +9,29 @@ Built from scratch — custom chassis, hand-soldered electronics, and code we it
 ## The Robot
 
 ```
-          FRONT (caster ball)
-       ┌──────────────────────┐
-       │  [S0][S1][S2][S3][S4]│  ← 5-channel IR sensor array
-       │         ___          │
-       │        (   )         │  ← caster ball (free wheel)
-       │         ‾‾‾          │
-       │                      │
-       │   ┌──────────────┐   │
-       │   │  Arduino Nano│   │
-       │   └──────────────┘   │
-       │   ┌──────────────┐   │
-       │   │  L298N Motor │   │
-       │   │    Driver    │   │
-       │   └──────────────┘   │
-       │   ┌──────────────┐   │
-       │   │ LM2596 Buck  │   │
-       │   │  Converter   │   │
-       │   └──────────────┘   │
-       │  [18650] [18650]     │  ← 2x Li-ion batteries
-       │                      │
-  ═══╤╧╤══════════════════╤╧╤═══
-  ▓▓▓│L│                  │R│▓▓▓  ← drive wheels (motors)
-  ═══╧╤╧══════════════════╧╤╧═══
-          REAR
+            FRONT (caster ball)
+       +------------------------+
+       |  [S0][S1][S2][S3][S4]  |  <-- 5-channel IR sensor array
+       |          ___           |
+       |         (   )          |  <-- caster ball (free wheel)
+       |                        |
+       |   +----------------+   |
+       |   |  Arduino Nano  |   |
+       |   +----------------+   |
+       |   +----------------+   |
+       |   |  L298N Motor   |   |
+       |   |    Driver      |   |
+       |   +----------------+   |
+       |   +----------------+   |
+       |   | LM2596 Buck    |   |
+       |   |  Converter     |   |
+       |   +----------------+   |
+       |  [18650]  [18650]      |  <-- 2x Li-ion batteries
+       |                        |
+  ====[L]======================[R]====
+  ####[ ]                      [ ]####  <-- drive wheels (motors)
+  ====[L]======================[R]====
+            REAR
 ```
 
 ## How It Works
