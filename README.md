@@ -207,8 +207,15 @@ Organized by **IUT Robotics Society**
 
 Format: autonomous line following race — black line on white surface, fastest time wins. No remote control, no manual intervention. Just your bot, your code, and the track.
 
-## About Us
+## Team — NSU
 
-CSE undergrads who spend way too much time soldering things at 3 AM and arguing about PID gains. We got into robotics because writing code that moves things in the real world hits different than another CRUD app.
+| Name | Role |
+|------|------|
+| **Mahin Ahmad** | Code & PID tuning |
+| **Faiyaz Tahsin** | Circuit & wiring |
+| **Ismail Hossain** | Chassis & hardware |
+| **Rimajul Islam Shihab** | Testing & calibration |
+
+Four CSE undergrads from **North South University** who spend way too much time soldering things at 3 AM and arguing about PID gains. We got into robotics because writing code that moves things in the real world hits different than another CRUD app.
 
 If you're from the competition and reading this — see you on the track. 🏁
