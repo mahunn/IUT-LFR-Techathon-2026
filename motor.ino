@@ -1,30 +1,30 @@
 // Motor control — handles direction + PWM speed for both motors
 // positive = forward, negative = reverse, 0 = stop (coast)
 
-void setMotor(int leftSpeed, int rightSpeed) { //fixed: was 'motor(int a, int b)'
+void motor(int a, int b) { //fixed: kept original motor name
   // left motor
-  if (leftSpeed > 0) {
-    digitalWrite(LM_FWD, HIGH);
-    digitalWrite(LM_BWD, LOW);
-  } else if (leftSpeed < 0) {
-    digitalWrite(LM_FWD, LOW);
-    digitalWrite(LM_BWD, HIGH);
+  if (a > 0) {
+    digitalWrite(lmf, HIGH);
+    digitalWrite(lmb, LOW);
+  } else if (a < 0) {
+    digitalWrite(lmf, LOW);
+    digitalWrite(lmb, HIGH);
   } else {
-    digitalWrite(LM_FWD, LOW);
-    digitalWrite(LM_BWD, LOW);
+    digitalWrite(lmf, LOW);
+    digitalWrite(lmb, LOW);
   }
-  analogWrite(LM_SPD, constrain(abs(leftSpeed), 0, 255));
+  analogWrite(lms, constrain(abs(a), 0, 255));
 
   // right motor
-  if (rightSpeed > 0) {
-    digitalWrite(RM_FWD, HIGH);
-    digitalWrite(RM_BWD, LOW);
-  } else if (rightSpeed < 0) {
-    digitalWrite(RM_FWD, LOW);
-    digitalWrite(RM_BWD, HIGH);
+  if (b > 0) {
+    digitalWrite(rmf, HIGH);
+    digitalWrite(rmb, LOW);
+  } else if (b < 0) {
+    digitalWrite(rmf, LOW);
+    digitalWrite(rmb, HIGH);
   } else {
-    digitalWrite(RM_FWD, LOW);
-    digitalWrite(RM_BWD, LOW);
+    digitalWrite(rmf, LOW);
+    digitalWrite(rmb, LOW);
   }
-  analogWrite(RM_SPD, constrain(abs(rightSpeed), 0, 255));
+  analogWrite(rms, constrain(abs(b), 0, 255));
 }

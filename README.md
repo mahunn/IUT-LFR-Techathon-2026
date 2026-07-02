@@ -149,12 +149,12 @@ If all 5 sensors read white (no line), we remember which direction we last turne
   A2             →    IR Sensor 2 (center)
   A3             →    IR Sensor 3
   A4             →    IR Sensor 4 (rightmost)
-  D5  (PWM)      →    L298N ENA (left motor speed)
-  D6             →    L298N IN1 (left motor forward)
-  D7             →    L298N IN2 (left motor backward)
-  D8             →    L298N IN3 (right motor forward)
-  D9             →    L298N IN4 (right motor backward)
-  D10 (PWM)      →    L298N ENB (right motor speed)
+  D5  (PWM)      →    L298N ENA (left motor speed - lms)
+  D6             →    L298N IN1 (left motor forward - lmf)
+  D7             →    L298N IN2 (left motor backward - lmb)
+  D8             →    L298N IN3 (right motor forward - rmf)
+  D9             →    L298N IN4 (right motor backward - rmb)
+  D10 (PWM)      →    L298N ENB (right motor speed - rms)
 ```
 
 ## File Structure
@@ -162,8 +162,8 @@ If all 5 sensors read white (no line), we remember which direction we last turne
 ```
 Sensor/
 ├── Sensor.ino    — main file: setup(), loop(), PID logic, global variables
-├── motor.ino     — setMotor(): handles direction and PWM for both wheels
-├── reading.ino   — readSensors(): reads IR array, debugPrint(): serial output
+├── motor.ino     — motor(): handles direction and PWM for both wheels
+├── reading.ino   — reading(): reads IR array, debugPrint(): serial output
 └── README.md     — you're reading this
 ```
 
@@ -175,7 +175,7 @@ These are the values you'll want to tweak on the actual track:
 
 | Parameter | Default | What it does |
 |-----------|---------|-------------|
-| `threshold` | 512 | Sensor cutoff — values above this = "line detected". Check with `debugPrint()`. |
+| `th` | 512 | Sensor cutoff — values above this = "line detected". Check with `debugPrint()`. |
 | `BASE_SPEED` | 180 | Forward speed. Higher = faster but harder to control on curves. |
 | `Kp` | 30.0 | How aggressively it steers. Too low = misses turns. Too high = wobbles. |
 | `Kd` | 20.0 | Dampens the wobble. Increase if robot oscillates side to side. |
